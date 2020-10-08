@@ -1,2 +1,2 @@
-web: sh setup.sh && streamlit run ui.py
-worker: gunicorn -w 3 -k uvicorn.workers.UvicornWorker main:app
+web: gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app
+worker: sh setup.sh && streamlit run ui.py
