@@ -4,7 +4,6 @@ from joblib import load
 from pydantic import  BaseModel
 import uvicorn
 import os
-
 from model import train, predict
 
 #initiate API
@@ -13,23 +12,45 @@ app = FastAPI(title='MadridxAirbnb assessed price predictor',
               The data comes from Murray Cox project Inside Airbnb and was goten the 13th of September, 2020.
 
               For the moment I am working to integrate the Streamlit (UI) and the FlastAPI server together in Heroku
-              (for the moment I can only display one of them) although they work together in local.
-                            ''',
+              (right now I can only display one of them) although they work together in local.
+               ''',
               version="1.0.0")
 
+# class for predictions post params
 class Prediction(BaseModel):
     param1: str
     param2: str
     param3: str
     param4: int
 
-@app.post('/predict')
-async def get_prediction(params: Prediction):
+# home page
+@app.get('/')
+def home():
+    return {"Greetings": 'Welcome to the MadridxAirbnb API for Assessed predicted prices for places for Airbnb in Madrid',
+            "Next step": "Please go to '/docs' for access documentation and trying GET and POST methods"}
 
+# GET
+@app.get('/predict/')
+async def get_prediction(neighbourhood_group, neighbourhood, room_type, minimum_nights):
+    train()
+    predicted_price = predict(neighbourhood_group, neighbourhood, room_type, minimum_nights)
+    return {'Neighbourhood': neighbourhood_group,
+            'Neighbourhood group': neighbourhood,
+            'Room type': room_type,
+            'Minimum nights': minimum_nights,
+            'Predicted price': predicted_price}
+
+# POST
+@app.post('/predict/')
+async def get_prediction(params: Prediction):
     train()
     predicted_price = predict(params.param1, params.param2, params.param3, params.param4)
-    return predicted_price
-    
+    return {'Neighbourhood': params.param1,
+            'Neighbourhood group': params.param2,
+            'Room type': params.param3,
+            'Minimum nights': params.param4,
+            'Predicted price': predicted_price}
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
