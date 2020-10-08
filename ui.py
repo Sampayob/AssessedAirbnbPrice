@@ -6,7 +6,7 @@ from model import train, predict
 
 # interact with FastAPI endpoint
 port = int(os.environ.get("PORT", 5000))
-url = 'http://127.0.0.1:' + str(port)
+url = 'http://0.0.0.0:' + str(port)
 
 endpoint = '/predict'
 
