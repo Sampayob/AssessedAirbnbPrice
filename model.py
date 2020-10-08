@@ -11,7 +11,7 @@ def train():
 
     seed = 0
 
-    df = pd.read_csv('data\listings.csv')
+    df = pd.read_csv('listings.csv')
 
     train, test = train_test_split(df, test_size=0.2, random_state=seed, shuffle=True)
 
