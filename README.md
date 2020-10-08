@@ -1,6 +1,8 @@
 # AssessedAirbnbPrice-FastAPI
 
-This projects aim to use **FastAPI** web framework for building a **Machine Learning API** as a **deployment tool**. FastAPI creates **automatic interactive API documentation** so methods can be proved insite.
+[MadridxAirbnb web app](https://madridxairbnb.herokuapp.com/docs)
+
+This project aim to use **FastAPI** web framework for building a **Machine Learning API** as a **deployment tool**. FastAPI creates **automatic interactive API documentation** so methods can be proved insite.
 
 - Machine Learning part consist in a **room/house price predictor for host** taking into account data (at September 2020) of **Madrid Airbnb zone**.
 
