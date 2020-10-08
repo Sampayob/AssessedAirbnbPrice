@@ -10,7 +10,7 @@ url = 'http://0.0.0.0:' + str(port)
 
 endpoint = '/predict'
 
-df = pd.read_csv('data\listings.csv')
+df = pd.read_csv('data//listings.csv')
 
 st.sidebar.markdown(
 """
